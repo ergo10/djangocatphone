@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <p>Название поставщика: {{ object.title }}</p>
+    <p>ФИО поставщика: {{ one_supplier.agent_firstname }} {{ one_supplier.agent_name }} {{ one_supplier.agent_patronymic }}</p>
+
+     {% if perms.catphone.change_supplier %}
+    <a href="{% url 'edit_supp_view' object.pk %}" class="btn btn-warning">Редактировать</a><br>
+
+    {% endif %}
+
+    {% if perms.catphone.delete_supplier %}
+    <form method="post" action="{% url 'del_supp_view' object.pk %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Удалить">
+        </form>
+    {% endif %}
+    <a href="{% url 'list_supp_view' %}" class="btn btn-info">Назад</a><br>
+
+{% endblock %}

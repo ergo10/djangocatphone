@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}">
+{% endblock %}
+{% block content %}
+    <div>
+        <h1>Список Котофонов</h1>
+        <a class="btn btn-primary" href="{% url 'add_product' %}">Добавить Котофон</a>
+        <a class="btn btn-success" href="{% url 'index_Catphone' %}">Назад</a>
+        {% comment %}
+<div>
+    {{ name }}
+</div>
+
+<p>
+    {{ fruit_list }}
+</p>
+
+<div>
+    {{  fruit_one.name }}
+</div>
+{% endcomment %}
+        <div>
+            {% for item in page_obj %}
+                <div class="card" style="width: 18rem;">
+                    {% if item.photo != " " %}
+                        <img src=" {{ item.photo.url }}" class="card-img-top" alt="...">
+                    {% else %}
+                        {#   <img src="/media/image/icon_fruit.jpg" class="card-img-top" alt="...">#}
+                        {#  <img src="https://wallbox.ru/resize/1024x768/wallpapers/main/201522/eae1b9af7ce9c95.jpg" class="card-img-top" alt="...">#}
+                        <img src="{% static 'image/7h7i.png' %}" class="card-img-top" alt="...">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text">{{ item.date_create|date:"Y-m-d l" }}</p>
+                        <a href="{% url 'one_product' item.pk %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+
+                        {% for page in page_obj.paginator.page_range %}
+                            {% if page_obj.number == page %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#">{{ page }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

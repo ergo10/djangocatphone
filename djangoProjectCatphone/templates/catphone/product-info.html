@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ fruit_item.name }}
+{% endblock %}
+
+{% block content %}
+    <p>Имя: {{ product_item.name }}</p>
+    <p>Описание: {{ product_item.description }}</p>
+    <p>Цена: {{ product_item.price }}</p>
+    <p>Дата создания: {{ product_item.date_create }}</p>
+    <p>Дата просрочки: {{ product_item.date_update }}</p>
+
+
+    <div class="container">
+    <form method="post" action="{% url 'add_basket_prod' product_item.pk %}">
+        {% csrf_token %}
+        {{ basket_form }}
+        <input type="submit" class="btn-success" value="Добавить в корзину">
+    </form>
+    </div>
+    <a href="{% url 'list_product' %}" class="btn btn-info">Назад</a>
+{% endblock %}
+
+
+

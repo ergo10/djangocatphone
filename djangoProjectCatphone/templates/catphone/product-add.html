@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление котофона
+{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+<table>
+    {{ form.as_table }}
+</table>
+    <input class="btn btn-success" type="submit" value="Добавить котофоны">
+</form>
+{% endblock %}
+
+
+ {% comment %}
+<div>
+    <p>Отправить данные на страницу фруктов (через метод GET)</p>
+<form action="/fruit/fruitsList/" method="get">
+    {% csrf_token %} <!-- csrf токен для защиты от межсайтового запроса-->
+    <label>ID</label> <input type="number" name="id" id="id" placeholder="поле id"><br>
+    <label>Name</label>  <input type="text" name="name" id="name" placeholder="поле name"><br>
+    <input type="submit" value="Отправить данные">
+</form>
+</div>
+
+<div>
+    <p>Отправить данные на страницу фруктов (через метод POST)</p>
+<form action="/fruit/fruitsList/" method="post">
+    {# Это комментарий шаблонизатора #}
+
+    {% comment %}
+    Многострочный комментарий
+
+    {% csrf_token %} <!-- csrf токен для защиты от межсайтового запроса-->
+    <label>ID</label> <input type="number" name="id" id="id" placeholder="поле id"><br>
+    <label>Name</label>  <input type="text" name="name" id="name" placeholder="поле name"><br>
+    <input type="submit" value="Отправить данные">
+</form>
+</div>
+  {% endcomment %}

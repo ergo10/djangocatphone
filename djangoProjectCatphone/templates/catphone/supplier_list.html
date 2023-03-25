@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}">
+{% endblock %}
+{% block content %}
+    <div>
+        <h1>Список поставщиков</h1>
+        <a class="btn btn-primary" href="{% url 'add_supp' %}">Добавить поставщика</a>
+
+
+        <div>
+            {% for item in object_list %}
+                <div class="card" style="width: 18rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        {# <a href="{% url 'one_fruit' item.pk %}" class="btn btn-primary">Подробнее</a> #}
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

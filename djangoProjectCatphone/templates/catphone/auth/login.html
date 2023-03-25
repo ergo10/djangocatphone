@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_div }}
+
+            <input type="submit" class="btn btn-primary" value="Войти">
+        </form>
+
+        <a class="btn btn-warning" href="{% url 'regis' %}">Зарегистрироваться</a>
+        <a class="btn btn-warning" href="{% url 'index_Catphone' %}">Назад</a>
+   </div>
+{% endblock %}

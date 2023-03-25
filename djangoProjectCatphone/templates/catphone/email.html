@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Отправка сообщения
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.subject.label }}
+            {{ form.subject }}
+
+            {{ form.content.label }}
+            {{ form.content }}
+
+            <input type="submit" class="btn btn-primary" value="Отправить сообщение">
+        </form>
+
+        <a class="btn btn-warning" href="{% url 'index_Catphone' %}">Назад</a>
+   </div>
+{% endblock %}

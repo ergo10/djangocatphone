@@ -1,0 +1,17 @@
+<header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'index_Catphone' %}" class="nav-link active" aria-current="page">Домашняя
+            страница</a></li>
+        <li class="nav-item"><a href="{% url 'list_product' %}" class="nav-link">Список котофонов</a></li>
+        <li class="nav-item"><a href="{% url 'add_product' %}" class="nav-link">Добавить котофон</a></li>
+        <li class="nav-item"><a href="{% url 'list_supp' %}" class="nav-link">Поставщики</a></li>
+        <li class="nav-item"><a href="{% url 'contact_email' %}" class="nav-link">Отправить письмо</a></li>
+        {% if request.user.is_anonymous %}
+            <li class="nav-item"><a href="{% url 'log in' %}" class="nav-link">Авторизация</a></li>
+            <li class="nav-item"><a href="{% url 'regis' %}" class="nav-link">Регистрация</a></li>
+        {% else %}
+            <li class="nav-item"><a href="{% url 'list_basket_prod' %}" class="nav-link">Корзина</a></li>
+            <li class="nav-item"><a href="{% url 'log out' %}" class="nav-link">Выйти</a></li>
+        {% endif %}
+    </ul>
+</header>
