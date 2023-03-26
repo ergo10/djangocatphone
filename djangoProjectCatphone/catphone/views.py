@@ -18,7 +18,7 @@ from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
 
 from django.http import JsonResponse
-from .serializers import CatphoneSerializers
+from .serializers import OrderSerializer
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -282,11 +282,11 @@ def contact_email(request):
 @api_view(['GET', 'POST'])
 def product_api_list(request):
     if request.method == "GET":
-        product_list = Catsphone.objects.all()
-        serializer = CatphoneSerializers(product_list, many=True)
+        fruit_list = Order.objects.all()
+        serializer = OrderSerializer(fruit_list, many=True)
         return Response({'product_list': serializer.data})
     elif request.method == "POST":
-        serializer = CatphoneSerializers(data=request.data)
+        serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -298,10 +298,10 @@ def product_api_detail(request, pk, format=None):
     product_obj = get_object_or_404(Catsphone, pk=pk)
     if product_obj.exist:
         if request.method == 'GET':
-            serializer = CatphoneSerializers(product_obj)
+            serializer = OrderSerializer(product_obj)
             return Response(serializer.data)
         elif request.method == 'PUT':
-            serializer = CatphoneSerializers(product_obj, data=request.data)
+            serializer = OrderSerializer(product_obj, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response({'message': 'Данные успешно изменены', 'product': serializer.data})

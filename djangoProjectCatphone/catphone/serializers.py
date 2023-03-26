@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Catsphone, Supplier
+from .models import Order
 
 
-class CatphoneSerializers(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Catsphone
-        fields = ['name', 'description', 'price', 'exist', 'supplier']
+        model = Order
+        fields = ['price', 'address_delivery']
